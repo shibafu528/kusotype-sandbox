@@ -8,3 +8,5 @@ const Wrapper = ({className, component, ...rest}) => {
         </div>
     )
 }
+
+export default Wrapper;
