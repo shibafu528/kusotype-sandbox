@@ -1,8 +1,6 @@
 {
-  "name": "kyomu",
+  "name": "kusotype",
   "version": "1.0.0",
-  "main": "index.js",
-  "types": "index.d.ts",
   "license": "MIT",
   "dependencies": {
     "@types/react": "^16.9.35",

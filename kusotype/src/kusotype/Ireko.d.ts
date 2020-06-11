@@ -1,3 +1,5 @@
+/// <reference types="react"/>
+
 type IrekoProps = {
     className?: string
 }

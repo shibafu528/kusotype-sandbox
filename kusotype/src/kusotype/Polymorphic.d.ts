@@ -1,3 +1,5 @@
+/// <reference types="react"/>
+
 // propsを上書き合成
 type OverrideProps<T extends React.ElementType, OverrideProps> = 
     Omit<React.ComponentPropsWithRef<T>, keyof OverrideProps> & OverrideProps;
@@ -7,7 +9,7 @@ type PolymorphicPropsBase<T extends React.ElementType | null | undefined> = {
     tag: T
 }
 
-// Wrapperコンポーネントのpropsを優先しつつ、
+// 多態コンポーネントの持つpropsを優先しつつ、
 // `tag` propsの指すコンポーネントのpropsも渡せるようにしたい
 type PolymorphicProps<P, T extends React.ElementType<TProps>, TProps = any> = 
     React.PropsWithChildren<OverrideProps<T, P>> & PolymorphicPropsBase<T>;
@@ -16,31 +18,16 @@ type PolymorphicProps<P, T extends React.ElementType<TProps>, TProps = any> =
 type OptionalPolymorphicProps<P, T extends React.ElementType<TProps> | null | undefined, TDefault extends React.ElementType<TDefaultProps>, TProps = any, TDefaultProps = any> =
     React.PropsWithChildren<OverrideProps<T extends null | undefined ? TDefault : T, P>> & Partial<PolymorphicPropsBase<T>>;
 
-// これはWrapperとなるコンポーネントのprops例
+// これは多態コンポーネントのprops例
 type PolymorphicImplProps = {
     className?: string
     emotion?: string
 }
 
-// propsでコンポーネントの指定を受けて、中で作ったりするWrapperなやつ
+// propsでコンポーネントの指定を受けて、中で作ったりするやつ
 export const Polymorphic: <T extends React.ElementType<P>, P = any>
     (props: PolymorphicProps<PolymorphicImplProps, T>) => React.ReactElement
 
-// デフォルトではdivになるWrapper
+// `tag` props を省略した場合にはdivになるバージョン
 export const DefaultPoly: <T extends React.ElementType | React.ElementType<P> | null | undefined = 'div', P = any>
     (props: OptionalPolymorphicProps<PolymorphicImplProps, T, 'div'>) => React.ReactElement
-
-/*
-  ex)
-
-  import Generic from 'kuso/Generic';
-
-  const Gomikasu: React.FC<{shout: string}> = ({shout}) => <div>{shout}</div>
-
-  const App: React.FC = () => (
-      <>
-            <Generic tag={'input'} type={'text'}/>
-            <Generic tag={Gomikasu} shout={'shine〜〜〜〜〜'}/>
-      </>
-  )
- */

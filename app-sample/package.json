@@ -1,10 +1,10 @@
 {
-  "name": "user",
+  "name": "app-sample",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "kuso": "link:../kuso"
+    "kusotype": "link:../kusotype"
   }
 }

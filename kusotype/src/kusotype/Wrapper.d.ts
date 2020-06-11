@@ -1,3 +1,5 @@
+/// <reference types="react"/>
+
 type WrapperProps<P> = {
     className?: string
     component: React.ComponentType<P>

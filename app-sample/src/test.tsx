@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Kyomu, {Hyde} from 'kuso/src/kuso/Kyomu';
-import Ireko from 'kuso/src/kuso/Ireko';
-import Wrapper from 'kuso/src/kuso/Wrapper';
-import {Polymorphic, DefaultPoly} from 'kuso/src/kuso/Polymorphic';
+import Kyomu, {Hyde} from 'kusotype/src/kusotype/Kyomu';
+import Ireko from 'kusotype/src/kusotype/Ireko';
+import Wrapper from 'kusotype/src/kusotype/Wrapper';
+import {Polymorphic, DefaultPoly} from 'kusotype/src/kusotype/Polymorphic';
 
 const App: React.FC = () => (
     <>
