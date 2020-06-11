@@ -12,6 +12,10 @@ type PolymorphicPropsBase<T extends React.ElementType | null | undefined> = {
 type PolymorphicProps<P, T extends React.ElementType<TProps>, TProps = any> = 
     React.PropsWithChildren<OverrideProps<T, P>> & PolymorphicPropsBase<T>;
 
+// 省略可能なデフォルト型を持ったバージョン
+type OptionalPolymorphicProps<P, T extends React.ElementType<TProps> | null | undefined, TDefault extends React.ElementType<TDefaultProps>, TProps = any, TDefaultProps = any> =
+    React.PropsWithChildren<OverrideProps<T extends null | undefined ? TDefault : T, P>> & Partial<PolymorphicPropsBase<T>>;
+
 // これはWrapperとなるコンポーネントのprops例
 type PolymorphicImplProps = {
     className?: string
@@ -21,10 +25,6 @@ type PolymorphicImplProps = {
 // propsでコンポーネントの指定を受けて、中で作ったりするWrapperなやつ
 export const Polymorphic: <T extends React.ElementType<P>, P = any>
     (props: PolymorphicProps<PolymorphicImplProps, T>) => React.ReactElement
-
-// 省略可能なデフォルト型を持ったバージョン
-type OptionalPolymorphicProps<P, T extends React.ElementType<TProps> | null | undefined, TDefault extends React.ElementType<TDefaultProps>, TProps = any, TDefaultProps = any> =
-    React.PropsWithChildren<OverrideProps<T extends null | undefined ? TDefault : T, P>> & Partial<PolymorphicPropsBase<T>>;
 
 // デフォルトではdivになるWrapper
 export const DefaultPoly: <T extends React.ElementType | React.ElementType<P> | null | undefined = 'div', P = any>
